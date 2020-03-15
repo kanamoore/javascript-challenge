@@ -13,8 +13,23 @@ tableData.forEach(ufodata => {
   });
 });
 
-//   * Make sure you have a column for `date/time`, `city`, `state`, `country`, `shape`, and `comment` at the very least.
-
 // * Use a date form in your HTML document and write JavaScript code that will listen for events and search through the `date/time`
+var button = d3.select("#filter-btn");
 
-table = d3.select("#ufo-table");
+button.on("click", function() {
+  var date_input = d3.select("#datetime");
+  var input_value = date_input.property("value");
+  console.log(input_value);
+  tbody.html("");
+
+  // Add new data to table only if it meets input data
+  var filteredData = tableData.filter(data => data.datetime === input_value);
+  console.log(filteredData);
+  filteredData.forEach(filtered_data => {
+    var row = tbody.append("tr");
+    Object.entries(filtered_data).forEach(function([key, value]) {
+      var cell = row.append("td");
+      cell.text(value);
+    });
+  });
+});
