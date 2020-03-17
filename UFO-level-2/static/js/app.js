@@ -25,21 +25,6 @@ tableData.forEach(ufodata => {
 var button = d3.select("#filter-btn");
 
 button.on("click", function() {
-  // var date_input = d3.select("#datetime");
-  // var date_input_value = date_input.property("value");
-
-  // var city_input = d3.select("#city");
-  // var city_input_value = city_input.property("value");
-
-  // var state_input = d3.select("#state");
-  // var state_input_value = state_input.property("value");
-
-  // var country_input = d3.select("#country");
-  // var country_input_value = country_input.property("value");
-
-  // var shape_input = d3.select("#shape");
-  // var shape_input_value = shape_input.property("value");
-
   // if input has any value
   var date_input = d3.select("#datetime");
   var city_input = d3.select("#city");
@@ -61,17 +46,36 @@ button.on("click", function() {
   console.log(shape_input_value);
   tbody.html("");
 
-  // Add new data to table only if it meets input data
-  // use .filter attr()?
+  data_input_list = [
+    date_input_value,
+    city_input_value,
+    state_input_value,
+    country_input_value,
+    shape_input_value
+  ];
 
-  // var filteredData = tableData.filter(
-  //   data => data.datetime === date_input_value && data.city === city_input_value
-  // );
+  non_blank_input = [];
 
-  var filteredData = tableData.filter(
-    data => data.datetime === date_input_value && data.city === city_input_value
-  );
+  // * loop through input value and see it has a data
+  // * if it has, use the data
+  // * if it doesn't, don't include
+  data_input_list.forEach(input => {
+    if (input != "") {
+      non_blank_input.push(input);
+    }
+  });
+
+  console.log(non_blank_input);
+
+  non_blank_input.forEach(available_input => {
+    var filteredData = tableData.filter(
+      data =>
+        data.datetime === date_input_value && data.city === city_input_value
+    );
+  });
+
   console.log(filteredData);
+
   if (filteredData.length >= 1) {
     filteredData.forEach(filtered_data => {
       var row = tbody.append("tr");
@@ -83,6 +87,8 @@ button.on("click", function() {
   } else {
     tbody
       .append("h5")
-      .text("Data not found. Please retry with differnt criteria!");
+      .text("Data not found. Please retry with different criteria!");
   }
 });
+
+// });
