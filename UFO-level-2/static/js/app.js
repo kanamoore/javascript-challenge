@@ -1,7 +1,7 @@
 // from data.js
 var tableData = data;
 
-// * Using the UFO dataset provided in the form of an array of JavaScript objects, write code that appends a table to a web page and then adds new rows of data for each UFO sighting.
+// Using the UFO dataset provided, append a table to a web page and then adds new rows of data for each UFO sighting.
 var tbody = d3.select("tbody");
 var option_list = [];
 
@@ -10,38 +10,33 @@ tableData.forEach(ufodata => {
   Object.entries(ufodata).forEach(function([key, value]) {
     var cell = row.append("td");
     cell.text(value);
+    option_list.push("");
     option_list.push(ufodata.shape);
   });
 });
 
+console.log(option_list);
+
 // Create a dynamic option for selecting a shape in search form
-// let uniqueoptionArray = [...new Set(option_list)];
-// uniqueoptionArray.forEach(option_item => {
-//   var select = ${
-//     <select class="form-control" id="FormControlSelect1"></select>
-//   };
-//   var option = ${<option value="foo">option_item</option>};
-//   select.append(option);
-// });
+uniqueoptionArray = new Set(option_list);
+uniqueoptionArray.forEach(function(option) {
+  var sel = document.getElementById("FormControlSelect1");
+  var opt = document.createElement("option");
+  opt.appendChild(document.createTextNode(option));
+  opt.value = option;
+  sel.appendChild(opt);
+});
 
-// $("#div").append(select);
-// var option = d3.select("#exampleFormControlSelect1");
-// uniqueoptionArray.forEach(option_data => {
-//   option.append(option_data);
-// });
-
-// * Use a date form in your HTML document and write JavaScript code that will listen for events and search through the `date/time`
+// Use a date form and search through data based on input
 var button = d3.select("#filter-btn");
 
 button.on("click", function() {
-  // if input has any value
   var date_input = d3.select("#datetime");
   var city_input = d3.select("#city");
   var state_input = d3.select("#state");
   var country_input = d3.select("#country");
-  var shape_input = d3.select("#shape");
+  var shape_input = d3.select(".shape");
 
-  // use that value. otherwise return all results
   var date_input_value = date_input
     .property("value")
     .trim()
@@ -58,11 +53,9 @@ button.on("click", function() {
     .property("value")
     .trim()
     .toLowerCase();
-  var shape_input_value = shape_input
-    .property("value")
-    .trim()
-    .toLowerCase();
+  var shape_input_value = shape_input.property("value");
 
+  // show the result in console
   console.log(date_input_value);
   console.log(city_input_value);
   console.log(state_input_value);
@@ -70,19 +63,7 @@ button.on("click", function() {
   console.log(shape_input_value);
   tbody.html("");
 
-  // // console.log(non_blank_input);
-  // function set_filter(data) {
-  //   if (date_input_value !== "") {
-  //     data.forEach(row => {
-  //       row.datetime === date_input_value;
-  //       filteredData.push(row.datetime);
-  //     });
-  //   } else {
-  //     return tableData;
-  //   }
-  // }
-  // console.log(tableData.filter(set_filter));
-
+  // Use input to filter data
   var filteredData = tableData.filter(row => {
     if (date_input_value !== "") {
       return row.datetime === date_input_value;
@@ -123,7 +104,7 @@ button.on("click", function() {
     }
   });
 
-  console.log(filteredData_5);
+  // console.log(filteredData_5);
 
   // Things I tried...
   // Option 1:
@@ -184,17 +165,17 @@ button.on("click", function() {
   //   }
   // });
 
-  // if (filteredData.length >= 1) {
-  //   filteredData.forEach(filtered_data => {
-  //     var row = tbody.append("tr");
-  //     Object.entries(filtered_data).forEach(function([key, value]) {
-  //       var cell = row.append("td");
-  //       cell.text(value);
-  //     });
-  //   });
-  // } else {
-  //   tbody
-  //     .append("h5")
-  //     .text("Data not found. Please retry with different criteria!");
-  // }
+  if (filteredData_5.length >= 1) {
+    filteredData_5.forEach(filtered_data => {
+      var row = tbody.append("tr");
+      Object.entries(filtered_data).forEach(function([key, value]) {
+        var cell = row.append("td");
+        cell.text(value);
+      });
+    });
+  } else {
+    tbody
+      .append("h5")
+      .text("Data not found. Please retry with different criteria!");
+  }
 });
