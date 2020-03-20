@@ -37,6 +37,7 @@ button.on("click", function() {
   var country_input = d3.select("#country");
   var shape_input = d3.select(".shape");
 
+  // retrieve input value
   var date_input_value = date_input
     .property("value")
     .trim()
@@ -63,7 +64,25 @@ button.on("click", function() {
   console.log(shape_input_value);
   tbody.html("");
 
-  // Use input to filter data
+  // var values = [
+  //   date_input_value,
+  //   city_input_value,
+  //   state_input_value,
+  //   country_input_value,
+  //   shape_input_value
+  // ];
+
+  // var filterData = tableData.filter((row, values) => {
+  //   values.forEach(v => {
+  //     if (v !== "") {
+  //       return row[v] === v;
+  //     } else {
+  //       return tableData;
+  //     }
+  //   });
+  // });
+
+  // // Use input to filter data
   var filteredData = tableData.filter(row => {
     if (date_input_value !== "") {
       return row.datetime === date_input_value;
@@ -104,66 +123,7 @@ button.on("click", function() {
     }
   });
 
-  // console.log(filteredData_5);
-
-  // Things I tried...
-  // Option 1:
-  // How can I keep adding if and else statements for city, state ...
-  // function filter_data(data) {
-  //   if (date_input_value.length !== 0) {
-  //     return data.datetime === date_input_value;
-  //   } else {
-  //     return data;
-  //   }
-  // }
-
-  // console.log(tableData.filter(filter_data));
-  // console.log(date_input_value.length);
-
-  // Option 2:
-  // tableData.filter(function(filter_data) {
-  //   if (date_input_value !== "") {
-  //     let data.datetime = date_input_value;
-  //   } else {
-  //     return tableData;
-
-  // if (city_input_value !== "") {
-  //   return data === city_input_value;
-  // } else {
-  //   return tableData;
-  // }
-  // });
-  // console.log(tableData);
-
-  // Option 3: Issue is this won't return data if input is blank.
-  // var filtered_data = [];
-
-  // non_blank_input.forEach(item => {
-  //   tableData.forEach(data => {
-
-  //     if (
-  //       data.datetime === item &&
-  //       data.city === item &&
-  //       data.state === item &&
-  //       data.country === item &&
-  //       data.shape === item
-  //     ) {
-  //       filtered_data.push(data);
-  //     }
-  //   });
-  // });
-
-  // console.log(filtered_data);
-
-  // Option 4:
-  // var filteredData = tableData.filter(input => {
-  //   if (date_input_value != "") {
-  //     return false;
-  //   }
-  //   if (city_input_value != "") {
-  //     return false;
-  //   }
-  // });
+  console.log(filteredData_5);
 
   if (filteredData_5.length >= 1) {
     filteredData_5.forEach(filtered_data => {

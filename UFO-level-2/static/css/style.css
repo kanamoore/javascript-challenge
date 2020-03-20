@@ -104,6 +104,54 @@ select {
   background-size: cover;
 }
 
+.hero .ufoicon {
+  z-index: 1;
+  position: absolute;
+  height: 10rem;
+  width: 10rem;
+  animation-name: moveUfo;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+}
+
+@keyframes moveUfo {
+  0% {
+    top: 0;
+    left: 0;
+  }
+  40% {
+    top: 40%;
+    bottom: 60%;
+    left: 50%;
+  }
+  45% {
+    top: 50%;
+    bottom: 50%;
+    left: 60%;
+  }
+  50% {
+    top: 60%;
+    left: 50%;
+    bottom: 40%;
+  }
+  55% {
+    top: 50%;
+    bottom: 50%;
+    left: 40%;
+  }
+  60% {
+    top: 40%;
+    bottom: 60%;
+    left: 60%;
+  }
+  100% {
+    top: 0;
+    left: 100%;
+    right: 0;
+  }
+}
+
 .hero h1 {
   margin-top: 200px;
   font-size: 0.1rem;
