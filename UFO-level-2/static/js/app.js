@@ -15,8 +15,6 @@ tableData.forEach(ufodata => {
   });
 });
 
-console.log(option_list);
-
 // Create a dynamic option for selecting a shape in search form
 uniqueoptionArray = new Set(option_list);
 uniqueoptionArray.forEach(function(option) {
@@ -57,32 +55,14 @@ button.on("click", function() {
   var shape_input_value = shape_input.property("value");
 
   // show the result in console
-  console.log(date_input_value);
-  console.log(city_input_value);
-  console.log(state_input_value);
-  console.log(country_input_value);
-  console.log(shape_input_value);
+  console.log(`Date input : ${date_input_value}`);
+  console.log(`City input : ${city_input_value}`);
+  console.log(`State input : ${state_input_value}`);
+  console.log(`Country input : ${country_input_value}`);
+  console.log(`Shape input : ${shape_input_value}`);
   tbody.html("");
 
-  // var values = [
-  //   date_input_value,
-  //   city_input_value,
-  //   state_input_value,
-  //   country_input_value,
-  //   shape_input_value
-  // ];
-
-  // var filterData = tableData.filter((row, values) => {
-  //   values.forEach(v => {
-  //     if (v !== "") {
-  //       return row[v] === v;
-  //     } else {
-  //       return tableData;
-  //     }
-  //   });
-  // });
-
-  // // Use input to filter data
+  // Use input to filter data
   var filteredData = tableData.filter(row => {
     if (date_input_value !== "") {
       return row.datetime === date_input_value;
@@ -123,8 +103,10 @@ button.on("click", function() {
     }
   });
 
+  console.log("Output showing in the table:");
   console.log(filteredData_5);
 
+  // Add the filter result to a table
   if (filteredData_5.length >= 1) {
     filteredData_5.forEach(filtered_data => {
       var row = tbody.append("tr");

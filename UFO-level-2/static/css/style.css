@@ -104,6 +104,7 @@ select {
   background-size: cover;
 }
 
+/* The styles for moving ufo icon */
 .hero .ufoicon {
   z-index: 1;
   position: absolute;
